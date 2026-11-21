@@ -11,7 +11,7 @@ Modernize the legacy banking app into a web application:
 
 The workshop has three stages:
 
-1. **Plan:** Analyze the legacy app and create a GitHub Epic with linked Stories.
+1. **Plan:** Analyze the legacy app and create one GitHub Epic per component, each with linked Stories.
 2. **Implement:** Build the approved Stories.
 3. **Validate and run:** Run tests, validate the app and run it locally.
 
@@ -52,8 +52,8 @@ Create it under your account, for example `modern-banking-app`. Do not add a REA
 **Step 2: Clone the legacy repository and point `origin` to your repository**
 
 ```bash
-git clone <PUBLIC_LEGACY_REPOSITORY_URL>
-cd <LEGACY_REPOSITORY_FOLDER>
+git clone https://github.com/raushankgupta/legacy-banking-app.git
+cd legacy-banking-app
 git remote remove origin
 git remote add origin <YOUR_REPOSITORY_URL>
 git remote -v
@@ -106,8 +106,11 @@ Switch Bob to **Plan Mode** and submit:
 >     modernization focused and within the workshop timeline.
 > -   Include a simple UI enhancement to make the dashboard look clean,
 >     modern and presentable for the demo.
-> -   Identify major development tasks and create a GitHub Epic with
->     linked Stories, including acceptance criteria.
+> -   Identify major development tasks and group them by component (for
+>     example, Backend, Frontend and Database). Create one GitHub Epic per
+>     component, titled with the component name, and link each Story only
+>     to the Epic for its component. Split any Story that spans two
+>     components. Include acceptance criteria for every Story.
 > -   Suggest an implementation sequence.
 >
 > **Important:** - Use my GitHub repository configured as `origin` for
@@ -120,7 +123,7 @@ Switch Bob to **Plan Mode** and submit:
 > want to retain SQLite or migrate to another database. - Do not modify
 > code or create a branch yet. - Present the plan for approval.
 
-**Checkpoint:** Bob has presented the plan and you have answered its questions. The Epic and Stories appear as Issues in your repository. Approve the plan before continuing.
+**Checkpoint:** Bob has presented the plan and you have answered its questions. The component Epics and their Stories appear as Issues in your repository, with each Story under the Epic for its component. Approve the plan before continuing.
 
 ### Stage 2: Agent Mode
 
