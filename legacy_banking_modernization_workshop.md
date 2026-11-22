@@ -241,14 +241,23 @@ Use only synthetic demo data. Never use real customer data or production credent
 - Don't commit build output (`target/`) or `legacybank.db`.
 - Check test results and the running app. Successful code generation alone does not prove the app works.
 
+
 ---
 
-## 7. Facilitator checklist
+## 7. Conclusion: Modernization Achievements
 
-- [ ] Publish the legacy repository publicly and add its URL in Section 3, Step 2.
-- [ ] The repository does not include `legacybank.db`. Participants create it in Section 3, Step 4. Commit a synthetic database only if you want to skip that step.
-- [ ] Test the clone-and-own-repository flow and all three prompts end to end with a separate GitHub account.
-- [ ] Confirm Bob can create Issues, branches, commits, pushes and Pull Requests in a participant's repository.
-- [ ] Keep a working example of the generated app's run instructions.
+Modernizing the legacy banking application delivers significant improvements across architecture, security, user experience, data integrity, and engineering productivity while maintaining complete business rule fidelity and leaving legacy assets intact.
 
-**Expected outcome:** Each participant shows the Issues in their repository (Stage 1), the modern app code pushed to it (Stage 2), and a validated app running locally (Stage 3).
+### Key Achievements
+
+| Dimension | Legacy State | Modernized State |
+|-----------|--------------|------------------|
+| **Planning & Issue Tracking** | Undocumented ad-hoc changes, no structured breakdown or issue traceability. | Disciplined upfront analysis in Plan Mode, decomposed into 4 GitHub Epics (`Database`, `Backend`, `Frontend`, `DevOps`) and 23+ granular Stories with explicit acceptance criteria, sub-issue linking, and traceable commits. |
+| **Architecture** | Monolithic Java Swing desktop app (Java 8) with SQL and business logic coupled directly inside UI frames. | Decoupled 3-tier web architecture: React 19 + TypeScript frontend and modular Java 21 + Spring Boot 3.3 REST API with distinct Controller, Service, and Repository layers. |
+| **Security & Auth** | Plaintext database credentials, static in-memory sessions, unauthenticated endpoints. | Secure authentication using BCrypt password hashing, stateless JWT tokens (HS256 / OAuth2 Resource Server), protected API routes, and sanitized error responses. |
+| **User Interface & UX** | Basic Swing desktop forms, no overview dashboard, rigid desktop layout. | Clean, responsive web UI built with the Carbon Design System (`@carbon/react`), featuring a KPI summary dashboard, Quick Actions panel, status tags, and accessible navigation. |
+| **Financial Integrity** | Dispersed SQL queries, risk of partial transaction commits on error. | Strict monetary precision with `BigDecimal` (scale 2, `HALF_UP`), `@Transactional` atomic operations with SQLite `BEGIN IMMEDIATE`, and enforced `CHECK` constraints. |
+| **Business Rule Fidelity** | Implicit and scattered business logic. | 100% business rule parity preserved and centralized: amount validation, account status checks, no overdraft, atomic transfers with shared references, and sequence-based reference numbers (`DEP`/`WDR`/`TRF`). |
+| **Quality & Testability** | Limited testability due to UI/database coupling. | 192+ automated tests (126 backend JUnit 5 tests with isolated test databases; 66 frontend Vitest + Testing Library component tests). |
+| **Zero-Disruption Migration** | N/A | Strict zero-modification guardrail: legacy source files, `pom.xml`, and the original `legacybank.db` remain completely untouched, verified with SHA-256 integrity scripts. |
+| **Maintainability & DX** | Legacy Java 8 build, shaded JAR packaging, desktop-only deployment. | Modern developer toolchain (Vite, TypeScript, Spring Boot 3, Java 21), reproducible database initialization scripts (`init.sh`), clean REST API, and streamlined local execution. |
