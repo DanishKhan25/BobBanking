@@ -1,0 +1,18 @@
+-- =============================================================================
+-- BCrypt Password Migration
+-- =============================================================================
+-- This file is intentionally left without a hardcoded hash value.
+--
+-- The Spring Boot backend applies the BCrypt migration programmatically at
+-- startup via DatabaseMigrationRunner, which:
+--   1. Checks whether EMPLOYEES.PASSWORD for 'admin' is already a BCrypt hash
+--      (length = 60 and starts with '$2a$').
+--   2. If not, generates the hash in Java using BCryptPasswordEncoder and
+--      issues the UPDATE in the same JDBC transaction.
+--
+-- This ensures no password hash (even a demo one) is committed to source control.
+--
+-- To apply manually from the command line, use the Spring Boot app:
+--   mvn spring-boot:run -pl modern/backend
+-- It will perform the migration on first start.
+-- =============================================================================
