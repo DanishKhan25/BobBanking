@@ -188,6 +188,11 @@ Once implementation is complete, submit:
 ## 5. Run the modernized app locally
 
 Use the project README in `modern/`, if Bob created one. Its commands take priority over the ones below.
+**Database** (from the database folder):
+
+```bash
+sh init.sh
+```
 
 **Backend** (from the backend folder):
 
